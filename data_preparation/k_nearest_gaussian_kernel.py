@@ -1,7 +1,7 @@
 import numpy as np
 import scipy
 import scipy.io as io
-from scipy.ndimage.filters import gaussian_filter
+from scipy.ndimage import gaussian_filter
 import os
 import glob
 from matplotlib import pyplot as plt
@@ -49,28 +49,27 @@ def gaussian_filter_density(img,points):
             sigma = (distances[i][1]+distances[i][2]+distances[i][3])*0.1
         else:
             sigma = np.average(np.array(gt.shape))/2./2. #case: 1 point
-        density += scipy.ndimage.filters.gaussian_filter(pt2d, sigma, mode='constant')
+        density += scipy.ndimage.gaussian_filter(pt2d, sigma, mode='constant')
     print ('done.')
     return density
 
 
 # test code
 if __name__=="__main__":
-    # show an example to use function generate_density_map_with_fixed_kernel.
-    root = 'D:\\workspaceMaZhenwei\\GithubProject\\Crowd_counting_from_scratch\\data'
+    
     
     # now generate the ShanghaiA's ground truth
-    part_A_train = os.path.join(root,'part_A_final/train_data','images')
-    part_A_test = os.path.join(root,'part_A_final/test_data','images')
+    part_A_train = r'C:\Users\HP\OneDrive\Desktop\tuchu\Context-Aware_Crowd_Counting-pytorch\ShanghaiTech\part_A\train_data\images'
+    part_A_test = r'C:\Users\HP\OneDrive\Desktop\tuchu\Context-Aware_Crowd_Counting-pytorch\ShanghaiTech\part_A\test_data\images'
     # part_B_train = os.path.join(root,'part_B_final/train_data','images')
     # part_B_test = os.path.join(root,'part_B_final/test_data','images')
     path_sets = [part_A_train,part_A_test]
-    
     img_paths = []
     for path in path_sets:
         for img_path in glob.glob(os.path.join(path, '*.jpg')):
             img_paths.append(img_path)
     
+    print(img_paths[0])
     for img_path in img_paths:
         print(img_path)
         mat = io.loadmat(img_path.replace('.jpg','.mat').replace('images','ground_truth').replace('IMG_','GT_IMG_'))
@@ -82,12 +81,12 @@ if __name__=="__main__":
         # save density_map to disk
         np.save(img_path.replace('.jpg','.npy').replace('images','ground_truth'), k)
     
-    '''
-    #now see a sample from ShanghaiA
-    plt.imshow(Image.open(img_paths[0]))
+    # '''
+    # #now see a sample from ShanghaiA
+    # plt.imshow(Image.open(img_paths[0]))
     
-    gt_file = np.load(img_paths[0].replace('.jpg','.npy').replace('images','ground_truth'))
-    plt.imshow(gt_file,cmap=CM.jet)
+    # gt_file = np.load(img_paths[0].replace('.jpg','.npy').replace('images','ground_truth'))
+    # plt.imshow(gt_file,cmap=CM.jet)
     
-    print(np.sum(gt_file))# don't mind this slight variation
-    '''
+    # print(np.sum(gt_file))# don't mind this slight variation
+    # '''

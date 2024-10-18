@@ -12,10 +12,10 @@ from my_dataset import CrowdDataset
 
 if __name__=="__main__":
     # configuration
-    train_image_root='./data/Shanghai_part_A/train_data/images'
-    train_dmap_root='./data/Shanghai_part_A/train_data/ground_truth'
-    test_image_root='./data/Shanghai_part_A/test_data/images'
-    test_dmap_root='./data/Shanghai_part_A/test_data/ground_truth'
+    train_image_root=r'C:\Users\HP\OneDrive\Desktop\tuchu\Context-Aware_Crowd_Counting-pytorch\ShanghaiTech\part_A\train_data\images'
+    train_dmap_root=r'C:\Users\HP\OneDrive\Desktop\tuchu\Context-Aware_Crowd_Counting-pytorch\ShanghaiTech\part_A\train_data\ground_truth'
+    test_image_root=r'C:\Users\HP\OneDrive\Desktop\tuchu\Context-Aware_Crowd_Counting-pytorch\ShanghaiTech\part_A\test_data\images'
+    test_dmap_root=r'C:\Users\HP\OneDrive\Desktop\tuchu\Context-Aware_Crowd_Counting-pytorch\ShanghaiTech\part_A\test_data\ground_truth'
     gpu_or_cpu='cuda' # use cuda or cpu
     lr                = 1e-7
     batch_size        = 1
